@@ -1,0 +1,63 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Tool.Database
+{
+	public class ConfigDataMgr : Singleton<ConfigDataMgr>
+	{
+		public Dictionary<uint, IDatabase> m_Databases;
+
+		public ConfigDataMgr()
+		{
+			m_Databases = new Dictionary<uint, IDatabase>();
+			$RegisterList
+			Load();
+		}
+
+		public void Load()
+		{
+			foreach (KeyValuePair<uint, IDatabase> data in m_Databases)
+			{
+				data.Value.Load();
+			}
+		}
+
+		private T GetDatabase<T>() where T : IDatabase
+		{
+            foreach (var item in m_Databases.Values)
+            {
+                if (item is T database)
+                {
+					return database;
+                }
+            }
+			return default;
+		}
+
+		private void RegisterDataType(IDatabase database)
+		{
+			m_Databases[database.TypeID()] = database;
+		}
+
+		$GetConfigList
+		private static GlobalConfigData mGlobalData = null;
+        public static GlobalConfigData GlobalData
+        {
+            get
+            {
+                if (mGlobalData == null)
+                {
+                    var globalList = Ins.getAllGlobalConfigData();
+                    if (globalList.Count != 1)
+                    {
+                        Debuger.LogError("GlobalConfigDatabase is not 1 line");
+                        return null;
+                    }
+                    mGlobalData = globalList[0];
+                }
+                return mGlobalData;
+            }
+        }
+	}
+}

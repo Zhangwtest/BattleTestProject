@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SkeletonControl : MonoBehaviour
+{
+    public int enemyHP;
+    public float enemyMoveSpeed;
+
+    private PlayerControl pc;
+    private Animator anim;
+    private Rigidbody2D rig;
+
+    private bool isWalk; 
+    private bool isDie;
+    private bool isEnemyAttack;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        rig = GetComponent<Rigidbody2D>();
+
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        isWalk = true;
+    }
+
+    void Update()
+    {
+        EnemyWalk();
+        EnemyAttack();
+        EnemyDie();
+    }
+
+    /// <summary>
+    /// 判断怪物行走的方法。
+    /// </summary>
+    void EnemyWalk()
+    {
+        if (isDie)
+        {
+            return;
+        }
+
+        if (isWalk)
+        {
+            rig.velocity = new Vector2(-enemyMoveSpeed, rig.velocity.y);
+            anim.SetBool("Walk", true);
+        }
+        else
+        {
+            rig.velocity = new Vector2(0, 0);
+            anim.SetBool("Walk", false);
+        }
+    }
+
+    /// <summary>
+    /// 检测和Player面前发生碰撞。
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("AttackPoint"))
+        {
+            isWalk = false;
+            isEnemyAttack = true;
+
+            pc.isAttack = true;
+        }
+    }
+
+    /// <summary>
+    /// 判断怪物攻击的方法。
+    /// </summary>
+    void EnemyAttack()
+    {
+        if (isDie)
+        {
+            return;
+        }
+
+        if (isEnemyAttack)
+        {
+            anim.SetBool("Attack", true);
+        }
+    }
+
+    /// <summary>
+    /// 判断怪物死亡的方法。
+    /// </summary>
+    void EnemyDie()
+    {
+        if (isDie)
+        {
+            return;
+        }
+        else
+        {
+            if (enemyHP <= 0)
+            {
+                isDie = true;
+                anim.SetBool("Die",true);
+                anim.SetBool("Attack", false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 怪物回收方法，挂在死亡动作中触发。
+    /// </summary>
+    void EnemyDestroy()
+    {
+        Destroy(gameObject);
+        EnemyBorn.Instance.enemyList.Remove(this);
+    }
+
+}
