@@ -1,4 +1,4 @@
-广告公共cd,加速扩建消耗钻石基数,初始值（itemID Value）,修建队列上限,最近制造显示上限,订单奖励装备对应钻石数量,订单所需普通装备品质,订单所需普通装备数量,订单高级装备爆率,重置订单消耗钻石数,装备材料不足钻石基础消耗,材料不足时，材料或装备加值,信任值加减,打折和涨价系数,顾客求购界面特殊表现时间间隔,顾客行为权重,顾客求购权重,顾客从桥派遣间隔时间,顾客从码头派遣时间间隔,顾客在部落停留时间,顾客求购间隔时间,初始顾客上限,特殊顾客求购时间,大地图点位刷新间隔（分钟）,大地图占领点敌人名字,体力参数,玩家名字长度限制,人物采集动作切换随机时间,属性换算战斗力系数,战斗力换算属性系数
-int,double[],double[][],int,int,int[],int[][],int[][],int[],int,int[],int[],int[],float[],float,int[],int[],float[],float[],float[],float[],int,float,float,string[],float[],int[],float[],float[][],float[][]
-adCommonCD,speedUpCostDiamondBase,initItemData,buildingQueueMax,latestEquipMakeShowMax,orderDiamondArray,orderQuality,orderNumData,orderBlastArray,orderResetCost,EquipMakeBaseCost,EquipMakeAdd,trustParam,priceChange,cusBuyingInterval,cusBehaviourPro,cusBuyingPro,cusFromBridge,cusFormMatou,cusStayInTribe,cusBuyInterval,cusOriginNum,cusWaitMinite,mapRefreshTimeMin,mapEnemyNames,energyParam,cusNameLimit,playerRandomTime,propToFightingValParam,fightingValToPropParam
-20,60;1;0,1/0;2/0;4/20;6/0;7/200,1,10,10;20;30;40,0/0/0;0/0/0;1/0/0;1/1/0,3/5/8;4/5/8;4/6/8;5/7/8,15;60;20;5,100,1;1;1;10,1;5;5;5,10;5,0.5;2,10,20;50;30,45;5;50,30;60,10;30,20;40,3;6,1,720,1,格兰鲁;亚部落;咢部落;加加族;布兰德里;艾瑞薇尔,1;50;200,7;14,4;8,2/1/0.1;1/0.5/0.05,80/80/2200;120/40/1800;145/20/1500;175/10/1000
+广告公共cd
+int
+adCommonCD
+20

@@ -26,12 +26,12 @@ public class CSVConverter
     public static string[][] SerializeCSVData(TextAsset csvData)
     {
         //AES
-        //string text = AES.Decrypt_CBC(csvData.text, "1234567890123456", "zombiestestIV123");
-        //string[] lineArray = text.Split("\n"[0]);
+        string text = AES.Decrypt_CBC(csvData.text, "1234567890123456", "zombiestestIV123");
+        string[] lineArray = text.Split("\n"[0]);
 
         //Normal
-        string text = csvData.text;
-        string[] lineArray = text.Replace("\n", string.Empty).TrimEnd("\r"[0]).Split("\r"[0]);
+        //string text = csvData.text;
+        //string[] lineArray = text.Replace("\n", string.Empty).TrimEnd("\r"[0]).Split("\r"[0]);
 
         string[][] csv;
         csv = new string[lineArray.Length - 3][];

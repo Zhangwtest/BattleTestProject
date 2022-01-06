@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tool.Database;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -9,10 +10,14 @@ public class PlayerControl : MonoBehaviour
     private Animator anim;
     private SkeletonControl sc;
 
+    private HeroConfigData hero;
 
     void Start()
     {
-        anim = GetComponent<Animator>();       
+        anim = GetComponent<Animator>();
+
+        //读取hero表id为1的数据       
+        hero = ConfigDataMgr.Ins.getHeroConfigData(1);
     }
 
     void Update()
@@ -20,6 +25,8 @@ public class PlayerControl : MonoBehaviour
         //PlayerBorn();    还没开始写
         PlayerAttack();
         sc = EnemyBorn.Instance.getEnemy();
+
+        Debug.Log(hero.defaultQuality);     //临时数据测试
     }
 
     /// <summary>
@@ -27,6 +34,7 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     void PlayerAttack()
     {
+        
         if (isAttack)
         {
             anim.SetBool("Attack", true);
