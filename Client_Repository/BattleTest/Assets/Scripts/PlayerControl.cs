@@ -6,6 +6,7 @@ using Tool.Database;
 public class PlayerControl : MonoBehaviour
 {
     public bool isAttack;
+    public int heroHp;
 
     private Animator anim;
     private SkeletonControl sc;
@@ -18,6 +19,7 @@ public class PlayerControl : MonoBehaviour
 
         //读取hero表id为1的数据       
         hero = ConfigDataMgr.Ins.getHeroConfigData(1);
+        heroHp = hero.baseHp;
     }
 
     void Update()
@@ -25,8 +27,6 @@ public class PlayerControl : MonoBehaviour
         //PlayerBorn();    还没开始写
         PlayerAttack();
         sc = EnemyBorn.Instance.getEnemy();
-
-        Debug.Log(hero.defaultQuality);     //临时数据测试
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            sc.enemyHP -= 1;
+            sc.enemyHP -= hero.baseAttack;
         }
     }
 

@@ -13,6 +13,7 @@ namespace Tool.Database
 			m_Databases = new Dictionary<uint, IDatabase>();
 			RegisterDataType(new GlobalConfigDatabase());
 			RegisterDataType(new HeroConfigDatabase());
+			RegisterDataType(new MonsterConfigDatabase());
 
 			Load();
 		}
@@ -63,6 +64,17 @@ namespace Tool.Database
 		public List<HeroConfigData> getAllHeroConfigData()
 		{
 			return GetDatabase<HeroConfigDatabase>().FindAll();
+		}
+		public MonsterConfigData getMonsterConfigData(int nId, bool bEmptyLog = true)
+		{
+			var data = GetDatabase<MonsterConfigDatabase>().GetDataByKey(nId);
+			if (bEmptyLog && data == null && nId != int.MaxValue)
+				Debuger.Log("MonsterConfig Is Null! ID:" + nId);
+			return data;
+		}
+		public List<MonsterConfigData> getAllMonsterConfigData()
+		{
+			return GetDatabase<MonsterConfigDatabase>().FindAll();
 		}
 
 		private static GlobalConfigData mGlobalData = null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tool.Database
 {
-    public class HeroConfigData
+    public class MonsterConfigData
     {
         /// <summary>
 		///ID
@@ -19,10 +19,6 @@ namespace Tool.Database
 		/// </summary>
 		public string beizhu;
 		/// <summary>
-		///职业
-		/// </summary>
-		public int type;
-		/// <summary>
 		///默认品质
 		/// </summary>
 		public int defaultQuality;
@@ -31,7 +27,7 @@ namespace Tool.Database
 		/// </summary>
 		public string prefabName;
 		/// <summary>
-		///英雄头像
+		///怪物头像
 		/// </summary>
 		public string heroHead;
 		/// <summary>
@@ -52,14 +48,14 @@ namespace Tool.Database
 		public int baseDefence;
     }
 
-    public class HeroConfigDatabase : IDatabase
+    public class MonsterConfigDatabase : IDatabase
     {
-        public uint TYPE_ID =2;
-        public const string DATA_PATH ="Config/HeroConfig";
+        public uint TYPE_ID =3;
+        public const string DATA_PATH ="Config/MonsterConfig";
 
-        private List<HeroConfigData> m_datas;
+        private List<MonsterConfigData> m_datas;
 
-        public  HeroConfigDatabase() { }
+        public  MonsterConfigDatabase() { }
 
         public uint TypeID()
         {
@@ -77,12 +73,12 @@ namespace Tool.Database
             m_datas = GetAllData(CSVConverter.SerializeCSVData(textAsset));
         }
 
-		private List<HeroConfigData> GetAllData(string[][] m_datas)
+		private List<MonsterConfigData> GetAllData(string[][] m_datas)
 		{
-			List<HeroConfigData> m_tempList = new List<HeroConfigData>();
+			List<MonsterConfigData> m_tempList = new List<MonsterConfigData>();
 			for (int i = 0; i < m_datas.Length; i++)
             {
-				HeroConfigData m_tempData = new HeroConfigData();
+				MonsterConfigData m_tempData = new MonsterConfigData();
                 
 				if (!int.TryParse(m_datas[i][0].Trim(),out m_tempData.ID))
 				{
@@ -94,41 +90,35 @@ namespace Tool.Database
 					m_tempData.beizhu=m_datas[i][2];
 					m_tempData.beizhu = m_tempData.beizhu.Replace("\\n", "\n");
 					
-				if (!int.TryParse(m_datas[i][3].Trim(),out m_tempData.type))
-				{
-					m_tempData.type=0;
-				}
-
-					
-				if (!int.TryParse(m_datas[i][4].Trim(),out m_tempData.defaultQuality))
+				if (!int.TryParse(m_datas[i][3].Trim(),out m_tempData.defaultQuality))
 				{
 					m_tempData.defaultQuality=0;
 				}
 
-					m_tempData.prefabName=m_datas[i][5];
+					m_tempData.prefabName=m_datas[i][4];
 					m_tempData.prefabName = m_tempData.prefabName.Replace("\\n", "\n");
-					m_tempData.heroHead=m_datas[i][6];
+					m_tempData.heroHead=m_datas[i][5];
 					m_tempData.heroHead = m_tempData.heroHead.Replace("\\n", "\n");
 					
-				if (!float.TryParse(m_datas[i][7].Trim(),out m_tempData.baseMoveSpeed))
+				if (!float.TryParse(m_datas[i][6].Trim(),out m_tempData.baseMoveSpeed))
 				{
 					m_tempData.baseMoveSpeed=0.0f;
 				}
 
 					
-				if (!int.TryParse(m_datas[i][8].Trim(),out m_tempData.baseHp))
+				if (!int.TryParse(m_datas[i][7].Trim(),out m_tempData.baseHp))
 				{
 					m_tempData.baseHp=0;
 				}
 
 					
-				if (!int.TryParse(m_datas[i][9].Trim(),out m_tempData.baseAttack))
+				if (!int.TryParse(m_datas[i][8].Trim(),out m_tempData.baseAttack))
 				{
 					m_tempData.baseAttack=0;
 				}
 
 					
-				if (!int.TryParse(m_datas[i][10].Trim(),out m_tempData.baseDefence))
+				if (!int.TryParse(m_datas[i][9].Trim(),out m_tempData.baseDefence))
 				{
 					m_tempData.baseDefence=0;
 				}
@@ -138,7 +128,7 @@ namespace Tool.Database
             return m_tempList;
 		}
 
-        public HeroConfigData GetDataByKey(int key)
+        public MonsterConfigData GetDataByKey(int key)
         {
             foreach (var data in m_datas)
             {
@@ -149,7 +139,7 @@ namespace Tool.Database
             return default;
         }
 
-		public List<HeroConfigData> FindAll(Predicate<HeroConfigData> handler = null)
+		public List<MonsterConfigData> FindAll(Predicate<MonsterConfigData> handler = null)
 		{
 			if (handler == null)
             {

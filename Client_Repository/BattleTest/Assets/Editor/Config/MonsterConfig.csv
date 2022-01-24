@@ -1,0 +1,4 @@
+ID,名称,备注,默认品质,预制体名称,怪物头像,移动速度,生命值,攻击力,防御力
+int,string,string,int,string,string,float,int,int,int
+ID,name,beizhu,defaultQuality,prefabName,heroHead,baseMoveSpeed,baseHp,baseAttack,baseDefence
+1,骷髅怪,骷髅怪-低级-近战,0,Hero_02,icon_head_hero_200001,6,50,20,0
